@@ -174,9 +174,17 @@ void deleteposition(int pos)
         {
             temp=temp->next;
         }
-        temp->prev->next=temp->next;
-        temp->next->prev=temp->prev;
-        free(temp);
+        if(temp->next==NULL)
+        {
+            temp->prev->next=NULL;
+            free(temp);
+        }
+        else
+        {
+            temp->prev->next=temp->next;
+            temp->next->prev=temp->prev;
+            free(temp);
+        }
     }
 }
 
