@@ -89,6 +89,10 @@ void insertposition(int pos){
         {
             prev=temp;
             temp=temp->next;
+            if(temp==NULL)
+            {
+                printf("\nNode cannot be inserted");
+            }
         }
         prev->next=newnode;
         newnode->next=temp;
@@ -146,12 +150,6 @@ void deleteposition(int pos)
     {
         printf("\nList is empty\n");
     }
-    else if(head->next==NULL)
-    {
-        free(head);
-        head=NULL;
-        printf("\nNode deleted\n");
-    }
     else
     {
         struct node *prev,*temp;
@@ -161,8 +159,16 @@ void deleteposition(int pos)
             prev=temp;
             temp=temp->next;
         }
-        prev->next=temp->next;
-        free(temp);
+        if(temp->next==NULL)
+        {
+            prev->next=NULL;
+            free(temp);
+        }
+        else
+        {
+            prev->next=temp->next;
+            free(temp);
+        }
     }
 }
 
